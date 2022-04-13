@@ -1,11 +1,11 @@
-import { logger } from './../../helpers/logger';
+import Logger from './../../helpers/logger';
 import {Express, Request, Response} from 'express';
 
 function OpenRoutes(app:Express){ 
     // user routes
     app.post('/api/users', (req : Request, res : Response) => {
-        logger.info('route operationnelle');
-        res.send(200);
+        Logger.info('route operationnelle');
+        res.sendStatus(200);
     });
     app.post('/api/sessions', (req : Request, res : Response) => {
     });

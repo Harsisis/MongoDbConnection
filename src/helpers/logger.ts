@@ -1,6 +1,16 @@
-import pino from "pino";
+import logger from 'pino';
+import dayjs from 'dayjs';
 
-export const logger = pino({
-  name: 'app-name',
-  level: 'debug'
+const Logger = logger({
+    transport: {
+      target: 'pino-pretty'
+    },
+    base:{
+        pid: false
+    },
+    timestamp: () => 
+        `,"time":"${dayjs().format()}"`
+    ,
 });
+
+export default Logger;

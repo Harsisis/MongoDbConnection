@@ -1,4 +1,9 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import config from "config";
+import { Schema } from "zod";
+
+const userSchema = new mongoose.Schema();
 
 interface UserDocument extends mongoose.Document { 
     id:  Number,
@@ -8,3 +13,6 @@ interface UserDocument extends mongoose.Document {
     gender: String,
     ip_address: String 
 }
+
+const UserModel = mongoose.model("User", userSchema); 
+export default UserModel;

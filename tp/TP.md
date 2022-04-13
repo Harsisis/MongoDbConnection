@@ -29,8 +29,8 @@
 3. À la racine créer le dossier config
    1. C'est notre .env avec toutes les informations liées à l'environnement de développement.
 4. Créer un fichier default.ts et default.example.ts
-   1. Renseigner le port et tous les éléments nécessaire à la connexion
-      2. Utiliser un site pour générer vos clés
+   1. **remplir les informations du default.ts**
+      1. Utiliser un site pour générer vos clés
 5. Créer vos dossiers en accord avec le modèle avancé ou tout autre modèle de votre choix
     1.  **Créer le dossier open et restricted dans routes**. Ce dossier va exporter une fonction unique qui va traiter toutes les routes
     2.  **Créer le dossier controller** Dans lequel on aura un fichier par ressource
@@ -95,4 +95,12 @@
 
 19. Retourner dans user.models.ts
     1.  Le mot de passe ne doit pas être stocker en clair dans la bdd, ainsi, nous allons faire une fonction permettant de le crypter des lors qu'il est sauvegardé en base.
-    2.  
+    2.  Aussi il faut créer une fonction afin de comparer le password. userSchema.methods.```comparePasswords = async function(candidatePassword: string):Promise<boolean> {
+    const user = this as UserDocument;
+
+   const salt = await bcrypt.genSalt(config.get<number>("saltWorkFactor")); 
+    const hash = await bcrypt.hashSync(user.password, salt);
+    return bcrypt.compare(candidatePassword, user.password).catch((e)=> false);
+}```
+
+   20. Une fois que le schema est fait, l'interface est faite, il faut créer les controller et les services
